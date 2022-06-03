@@ -1,0 +1,45 @@
+---
+# If the bastion host is not 8.5 or greater we need to upgrade it
+# This means using our developer or internal subscriptions to flip this to RHEL 8.5+
+- name: "Switch the Bastion to the Portal and Upgrade"
+  hosts: bastion
+  become: true
+  tasks:
+
+    - name: "Unregister the system from the Satellite"
+      command: "subscription-manager unregister"
+
+    - name: "Backup the current config"
+      command: "mv /etc/rhsm/rhsm.conf /etc/rhsm/rhsm.opentlc"
+
+    - name: "Restore the portal config"
+      command: "cp /etc/rhsm/rhsm.conf.kat-backup /etc/rhsm/rhsm.conf"
+
+    - name: "Reset the manage_repos bit to true"
+      command: "sed -i ‘s/manage_repos = 0/manage_repos = 1/g’ /etc/rhsm/rhsm.conf"
+
+    - name: "Force a restart of the rhsm certificate daemon"
+      service: 
+        name: rhsmcertd
+        state: restarted
+    
+    - name: "Reregister the system with the Red Hat Portal"
+      command: "subscription-manager register --org={{ org_name }} --activationkey={{ activationkey }}"
+
+    - name: "Ensure the basic repos are enabled"
+      command: "subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms --enable=rhel-8-for-x86_64-appstream-rpms"
+
+    - name: "Update the system to the latest and greatest RHEL 8"
+      yum:
+        name: "*"
+        state: "latest"
+
+    - name: "Restart the system in a minute"
+      command: "shutdown -r 2 'The system is restarting in 2 minutes, please save your work.'"
+
+    - name: "COMPLETION NOTICE"
+      debug:
+        msg: "The system will restart. Log back in when the system is restarted."
+        
+
+    
