@@ -1,0 +1,13 @@
+---
+- name: "Deploy MS SQL Server for Linux Demo"
+  hosts: all
+    
+  roles:
+  - microsoft.sql.server
+  
+  post_tasks:
+  - firewalld:
+      port: 1433/tcp
+      permanent: yes
+      immediate: yes
+      state: enabled
