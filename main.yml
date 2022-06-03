@@ -3,11 +3,11 @@
   hosts: all
   
   roles:
-  - microsoft.sql.server
+    - microsoft.sql.server
   
   post_tasks:
-  - firewalld:
-      port: 1433/tcp
-      permanent: yes
-      immediate: yes
-      state: enabled
+    - firewalld:
+        port: 1433/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
