@@ -8,6 +8,7 @@
 
     - name: "Unregister the system from the Satellite"
       command: "subscription-manager unregister"
+      ignore_errors: true
 
     - name: "Backup the current config"
       command: "mv /etc/rhsm/rhsm.conf /etc/rhsm/rhsm.opentlc"
