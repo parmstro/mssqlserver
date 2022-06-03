@@ -12,5 +12,7 @@
 
   - name: "Install the package"
     yum:
-      name: "rhel-system-roles"
+      name: 
+        - "rhel-system-roles"
+        - "ansible-collection-microsoft-sql"
       state: "latest"
