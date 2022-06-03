@@ -16,7 +16,10 @@
       command: "cp /etc/rhsm/rhsm.conf.kat-backup /etc/rhsm/rhsm.conf"
 
     - name: "Reset the manage_repos bit to true"
-      command: "sed -i ‘s/manage_repos = 0/manage_repos = 1/g’ /etc/rhsm/rhsm.conf"
+      replace: 
+        path: "/etc/rhsm/rhsm.conf"
+        regexp: "manage_repos = 0"
+        replace: "manage_repos = 1" 
 
     - name: "Force a restart of the rhsm certificate daemon"
       service: 
