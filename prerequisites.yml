@@ -6,7 +6,7 @@
 
 - name: "Install rhel-system-roles for ansible"
   become: true
-  hosts: all
+  hosts: bastion
   
   tasks:
 
