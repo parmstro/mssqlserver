@@ -6,4 +6,5 @@
   mssql_edition: Developer
   mssql_enable_sql_agent: true
   mssql_input_sql_file: my_app_dev_env.sql
- 
+  org_name: "{{ vault_org_name }}"
+  activationkey: "{{ vault_activationkey }}"
