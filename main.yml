@@ -12,3 +12,10 @@
         permanent: yes
         immediate: yes
         state: enabled
+
+    - name: "Install a basic sql command client"
+      yum:
+        name: "sqlcmd"
+        state: latest
+
+ 

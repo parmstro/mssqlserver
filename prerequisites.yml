@@ -2,7 +2,8 @@
 # This play installs the rhel-system-roles
 # Playbooks referencing the rhel-system-roles will not
 # execute until these are installed.
-
+# NOTE: even though classified as a rhel-system-role the mssqlserver 
+#       role is distributed in its own package
 
 - name: "Install rhel-system-roles for ansible"
   become: true
