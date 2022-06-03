@@ -1,7 +1,7 @@
 ---
 - name: "Deploy MS SQL Server for Linux Demo"
   hosts: all
-    
+  
   roles:
   - microsoft.sql.server
   

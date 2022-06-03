@@ -1,0 +1,13 @@
+---
+# This play installs the rhel-system-roles
+# Playbooks referencing the rhel-system-roles will not
+# execute until these are installed.
+
+
+- name: "Install rhel-system-roles for ansible"
+  hosts: all
+  tasks:
+  - name: "Install the package"
+    yum:
+    package: "rhel-system-roles"
+    state: "latest"
